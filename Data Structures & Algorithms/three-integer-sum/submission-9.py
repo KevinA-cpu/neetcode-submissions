@@ -1,0 +1,30 @@
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        # 1 brute force
+        # 2 sort 
+        #  [-4,-1,-1,0,1,2]
+        length = len(nums)
+        nums.sort()
+        answer =[]
+        l, r = 0, length-1
+        memo={}
+        for i in range(length):
+            if i > 0 and nums[i] == nums[i-1]:
+                continue
+
+            l = i+1
+            r=length-1
+            while(l<r):
+                threeSum = nums[i]+nums[l]+nums[r]
+                if threeSum==0:
+                    answer.append([nums[l], nums[i], nums[r]])
+                    l+=1
+                    while(l+1 < length and nums[l-1] == nums[l]):
+                        l+=1
+                else:
+                    if threeSum > 0:
+                        r-=1
+                    else:
+                        l+=1
+
+        return answer
